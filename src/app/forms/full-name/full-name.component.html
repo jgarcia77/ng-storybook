@@ -1,0 +1,25 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <label>
+    First Name:
+    <input type="text" formControlName="firstName">
+  </label>
+
+  <label>
+    Last Name:
+    <input type="text" formControlName="lastName">
+  </label>
+
+  <button type="submit" [disabled]="!form.valid">Submit</button>
+</form>
+
+<p>
+  Form Valid: {{form.valid}}
+</p>
+
+<p>
+  First Name: {{form.controls.firstName.value}}
+</p>
+
+<p>
+  Last Name: {{form.controls.lastName.value}}
+</p>
