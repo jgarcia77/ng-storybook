@@ -1,20 +1,21 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AliasesComponent } from '../../app/forms/aliases/aliases.component';
-import { ReactiveFormComponent } from '../../app/forms/reactive-form/reactive-form.component';
-import { text, withKnobs } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
+import { text, withKnobs } from '@storybook/addon-knobs';
+import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 
-const stories = storiesOf('Forms/Reactive', module);
+const stories = storiesOf('Forms/Aliases', module);
 
 stories.addDecorator(moduleMetadata({
     imports: [ReactiveFormsModule],
-    declarations: [AliasesComponent]
+    declarations: []
 }));
 
 stories.add('default', () => ({
-    component: ReactiveFormComponent,
+    component: AliasesComponent,
     props: {
-        submit: action('submit')
+        aliases: new FormArray([]),
+        aliasesChange: action('aliasesChange')
     }
 }));

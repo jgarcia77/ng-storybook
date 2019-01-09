@@ -48,18 +48,6 @@
     </div>
   </div>
 
-  <div formArrayName="aliases">
-    <h3>Aliases</h3> <button (click)="addAlias()">Add Alias</button>
-  
-    <div *ngFor="let address of aliases.controls; let i=index">
-      <!-- The repeated alias template -->
-      <div>
-        Alias:
-        <input type="text" [formControlName]="i">
-      </div>
-    </div>
-  </div>
-
   <div>
     <button type="submit" [disabled]="!form.valid">Submit</button>
   </div>
@@ -96,12 +84,3 @@
 <p>
   Zip: {{form.controls.address.controls.zip.value}}
 </p>
-
-<div>
-  Aliases
-
-  <div *ngFor="let alias of form.controls.aliases.controls; let i=index">
-
-    {{alias.value}}
-  </div>
-</div>

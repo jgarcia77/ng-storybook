@@ -33,11 +33,11 @@ export class FullNameComponent implements OnInit {
     this.submit.emit(this.form);
   }
 
-  public get aliases() {
-    return this.form.get('aliases') as FormArray
-  }
+  // public get aliases() {
+  //   return this.form.get('aliases') as FormArray
+  // }
 
-  public addAlias() {
-    this.aliases.push(this.fb.control(''));
-  }
+  // public addAlias() {
+  //   this.aliases.push(this.fb.control(''));
+  // }
 }
