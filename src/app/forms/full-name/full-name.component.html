@@ -1,39 +1,51 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
   <div>
-    <label>
+    <div>
       First Name:
-      <input type="text" formControlName="firstName" required maxlength="20">
-    </label>
+      <input type="text" formControlName="firstName" required maxlength="21">
+      <span *ngIf="form.controls.firstName.invalid && (form.controls.firstName.dirty || form.controls.firstName.touched)">
+        <span *ngIf="form.controls.firstName.errors.required">
+            First name is missing
+        </span>
 
-    <label>
+        <span *ngIf="form.controls.firstName.errors.maxlength">
+            First cannot exceed 20 characters
+        </span>
+      </span>
+    </div>
+
+    <div>
       Last Name:
       <input type="text" formControlName="lastName" required maxlength="20">
-    </label>
+      <span *ngIf="form.controls.lastName.invalid && (form.controls.lastName.dirty || form.controls.lastName.touched)">
+          Last name is missing
+      </span>
+    </div>
   </div>
 
   <div formGroupName="address">
     <h3>Address</h3>
   
-    <label>
+    <div>
       Street:
       <input type="text" formControlName="street">
-    </label>
+    </div>
   
-    <label>
+    <div>
       City:
       <input type="text" formControlName="city">
-    </label>
+    </div>
     
-    <label>
+    <div>
       State:
       <input type="text" formControlName="state">
-    </label>
+    </div>
   
-    <label>
+    <div>
       Zip Code:
       <input type="text" formControlName="zip">
-    </label>
+    </div>
   </div>
 
   <div formArrayName="aliases">
@@ -41,10 +53,10 @@
   
     <div *ngFor="let address of aliases.controls; let i=index">
       <!-- The repeated alias template -->
-      <label>
+      <div>
         Alias:
         <input type="text" [formControlName]="i">
-      </label>
+      </div>
     </div>
   </div>
 
