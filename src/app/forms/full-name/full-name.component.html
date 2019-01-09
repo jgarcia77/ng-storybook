@@ -1,16 +1,61 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
-  <label>
-    First Name:
-    <input type="text" formControlName="firstName">
-  </label>
 
-  <label>
-    Last Name:
-    <input type="text" formControlName="lastName">
-  </label>
+  <div>
+    <label>
+      First Name:
+      <input type="text" formControlName="firstName" required maxlength="20">
+    </label>
 
-  <button type="submit" [disabled]="!form.valid">Submit</button>
+    <label>
+      Last Name:
+      <input type="text" formControlName="lastName" required maxlength="20">
+    </label>
+  </div>
+
+  <div formGroupName="address">
+    <h3>Address</h3>
+  
+    <label>
+      Street:
+      <input type="text" formControlName="street">
+    </label>
+  
+    <label>
+      City:
+      <input type="text" formControlName="city">
+    </label>
+    
+    <label>
+      State:
+      <input type="text" formControlName="state">
+    </label>
+  
+    <label>
+      Zip Code:
+      <input type="text" formControlName="zip">
+    </label>
+  </div>
+
+  <div formArrayName="aliases">
+    <h3>Aliases</h3> <button (click)="addAlias()">Add Alias</button>
+  
+    <div *ngFor="let address of aliases.controls; let i=index">
+      <!-- The repeated alias template -->
+      <label>
+        Alias:
+        <input type="text" [formControlName]="i">
+      </label>
+    </div>
+  </div>
+
+  <div>
+    <button type="submit" [disabled]="!form.valid">Submit</button>
+  </div>
 </form>
+<hr>
+<p>
+  Form Status: {{form.status}}
+</p>
 
 <p>
   Form Valid: {{form.valid}}
@@ -23,3 +68,28 @@
 <p>
   Last Name: {{form.controls.lastName.value}}
 </p>
+
+<p>
+  Street: {{form.controls.address.controls.street.value}}
+</p>
+
+<p>
+  City: {{form.controls.address.controls.city.value}}
+</p>
+
+<p>
+  State: {{form.controls.address.controls.state.value}}
+</p>
+
+<p>
+  Zip: {{form.controls.address.controls.zip.value}}
+</p>
+
+<div>
+  Aliases
+
+  <div *ngFor="let alias of form.controls.aliases.controls; let i=index">
+
+    {{alias.value}}
+  </div>
+</div>

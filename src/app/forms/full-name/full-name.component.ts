@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 
 @Component({
   selector: 'app-full-name',
@@ -10,17 +10,34 @@ export class FullNameComponent implements OnInit {
   @Output()
   submit: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
-  form = new FormGroup({
-    firstName: new FormControl('', [Validators.required, Validators.maxLength(20)]),
-    lastName: new FormControl('', [Validators.required, Validators.maxLength(20)])
+  form = this.fb.group({
+    firstName: ['', [Validators.required, Validators.maxLength(20)]],
+    lastName: ['', [Validators.required, Validators.maxLength(20)]],
+    address: this.fb.group({
+      street: ['', Validators.required],
+      city: ['', Validators.required],
+      state: ['', Validators.required],
+      zip: ['', Validators.required]
+    }),
+    aliases: this.fb.array([
+      this.fb.control('')
+    ])
   });
 
-  constructor() { }
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
   }
 
   public onSubmit() {
     this.submit.emit(this.form);
+  }
+
+  public get aliases() {
+    return this.form.get('aliases') as FormArray
+  }
+
+  public addAlias() {
+    this.aliases.push(this.fb.control(''));
   }
 }
